@@ -2,11 +2,11 @@ import 'dart:math';
 
 // Classe Client
 class Client {
-  String _dni; //  _ Per que es privada
+  String _dni; //  _ Per que es una variable privada
   String nom, correu, telefon, numeroTargeta; 
 
 
-// Constructors
+// Constructors clase Client
   Client(this._dni, this.nom, {this.correu = '', this.telefon = '', this.numeroTargeta = ''});
 
   Client.tot(this._dni, this.nom, this.correu, this.telefon, this.numeroTargeta);
@@ -39,28 +39,26 @@ abstract class Vehicle {
   late String llogatPer;
   int quilometratge;
 
-/////borrar constructors
-  // Constructors
+///// borrar constructors? no por que los pide la practica
+  // Constructors clase Vehicle
   Vehicle.buit() 
       : matricula = '', 
         marca = '', 
         model = '', 
         estaLlogat = false, 
-        llogatPer = '', // Inicialización de llogatPer
-        quilometratge = 0; // Constructor per defecte sense atributs
+        llogatPer = '', 
+        quilometratge = 0; // Constructor per defecte sense atribut
 
   Vehicle.matricula(this.matricula) 
       : marca = '', 
         model = '', 
         estaLlogat = false, 
-        llogatPer = '', // Inicialización de llogatPer
+        llogatPer = '', 
         quilometratge = 0; // Constructor amb matrícula
 
-  Vehicle.full(this.matricula, this.marca, this.model, this.estaLlogat, this.llogatPer, this.quilometratge); // Constructor amb tots els atributs
+  Vehicle.full(this.matricula, this.marca, this.model, this.estaLlogat, this.llogatPer, this.quilometratge); // Constructor amb tots els atributs.
 
-  Vehicle(this.matricula, this.marca, this.model)
-      : estaLlogat = false,
-        quilometratge = 0;
+  Vehicle(this.matricula, this.marca, this.model) : estaLlogat = false, quilometratge = 0; // Constructor amb atributs matricula,marca i model.
 
  // Getters
   String get getMatricula => matricula;
@@ -90,7 +88,6 @@ abstract class Vehicle {
   }
 //////////////////////////////////////////////
   bool estaLlogatStatus() => estaLlogat;
-  
 
 int compareTo(Vehicle other) {
     if (this.runtimeType != other.runtimeType) {
@@ -103,27 +100,22 @@ int compareTo(Vehicle other) {
 String toString() {
   String estatLlogat = estaLlogat ? 'Llogat per: $llogatPer' : 'Anteriorment llogat per: $llogatPer';
   return 'Cotxe: $marca $model, Matricula: $matricula, Llogat: $estaLlogat, $estatLlogat, Quilometratge: $quilometratge';
-}
-
-}
-
+}}
 
 // Classe Cotxe
 class Cotxe extends Vehicle {
-  Cotxe({String matricula = '', String marca = '', String model = ''}) : super(matricula, marca, model);
+  Cotxe({String matricula = '', String marca = '', String model = ''}) : super(matricula, marca, model); // Constructor
 
   @override
 String toString() {
   return 'Cotxe: ${super.toString()}';
-}
-}
-
+}}
 
 // Classe Moto
 class Moto extends Vehicle {
   int cilindrada;
 
-  Moto({String matricula = '', String marca = '', String model = '', this.cilindrada = 0}) : super(matricula, marca, model);
+  Moto({String matricula = '', String marca = '', String model = '', this.cilindrada = 0}) : super(matricula, marca, model); // Constructor
 
   @override
 String toString() {
@@ -163,6 +155,7 @@ class ServeiLloguer {
   }
   print('\nCotxe no estava llogat.');
 }
+  
 void llogarMoto(String matricula, String dni) {
   for (var moto in motos) {
     if (moto.matricula == matricula && !moto.estaLlogat) {
@@ -173,6 +166,7 @@ void llogarMoto(String matricula, String dni) {
   }
   print('Moto no disponible per llogar.');
 }
+  
 void retornarMoto(String matricula) {
   for (var moto in motos) {
     if (moto.matricula == matricula && moto.estaLlogat) {
@@ -199,6 +193,11 @@ void retornarMoto(String matricula) {
   }
 }
 
+
+
+
+
+
 // Aplicació Executable
 void main() {
   ServeiLloguer serveiLloguer = ServeiLloguer();
@@ -221,8 +220,7 @@ void main() {
   Client client1 = Client('12345678A', 'John Doe', correu: 'john@example.com', telefon: '123456789', numeroTargeta: '1234-5678-9101-1121');
   Client client2 = Client('87654321B', 'Jane Smith', correu: 'jane@example.com', telefon: '987654321', numeroTargeta: '2121-1098-7654-3210');
 
-  // Llogar vehicles
-// Llogar vehicles (10 lloguers)
+// Llogar vehicles 10 lloguers necesita matricula i dni
 serveiLloguer.llogarCotxe('JKL678', client1.dni);  // Client 1 lloga un Mercedes A-Class
 serveiLloguer.llogarCotxe('ABC123', client1.dni);  // Client 1 lloga un Toyota Corolla
 serveiLloguer.llogarCotxe('XYZ789', client2.dni);  // Client 2 lloga un Ford Focus
@@ -234,8 +232,7 @@ serveiLloguer.llogarMoto('MOT123', client1.dni);   // Client 1 lloga una Yamaha 
 serveiLloguer.llogarMoto('MOT456', client2.dni);   // Client 2 lloga una Kawasaki Ninja
 serveiLloguer.llogarMoto('MOT654', client2.dni);   // Client 2 lloga una Suzuki GSX
 
-  // Retornar vehicles
-// Retornar alguns vehicles
+// Retornar alguns vehicles necesita dni 
 serveiLloguer.retornarCotxe('ABC123');  // Retornar el Toyota Corolla
 serveiLloguer.retornarCotxe('RST234');  // Retornar el BMW X3
 serveiLloguer.retornarCotxe('LMN456');  // Retornar el Honda Civic
@@ -249,6 +246,7 @@ print("\nInformació Rent a car");
   int cotxesLlogatsCount = serveiLloguer.comptarCotxesLlogats();
   int motosLlogadesCount = serveiLloguer.comptarMotosLlogades();
 
+  // Mostrar el numero de cotxes i motos llogats
   print('Total cotxes llogats: $cotxesLlogatsCount');
   print('Total motos llogades: $motosLlogadesCount');
 
