@@ -9,7 +9,7 @@ void main(List<String> args) {
 }
 
 void generaPrimers(int n) {
-  List<int> numerosPrimos = [];
+List<int> numerosPrimos = [];
 
   for (int i = 2; i < n; i++) {   // Busquem els numeros primers mes petits que l'argument ingresat
     if (esPrimo(i)) {             // Amb el bucle for mirem tots els nombres inferiors a l'argument
@@ -20,13 +20,6 @@ void generaPrimers(int n) {
   print("Numeros primos menors de $n:");  // Mostra els numeros primers trobats
   print(numerosPrimos);
 
-  print("Parelles de numeros primos amb diferencia de 2:"); // Busquem i mostrem les parelles de numeros primers que la diferencia entre ells sigue de 2
-  for (int i = 0; i < numerosPrimos.length - 1; i++) {      // 
-    if (numerosPrimos[i + 1] - numerosPrimos[i] == 2) {     // Aquí s'examina si la diferència entre el nombre primer actual (numerosPrimos[i]) i el següent 
-      print("(${numerosPrimos[i]}, ${numerosPrimos[i + 1]})"); //(numerosPrimos[i + 1]) és exactament 2. Si la condició és certa, vol dir que hem trobat una parella de nombres primers que satisfà la condició desitjada.
-    }
-  }
-}
  print("Parelles de numeros primos amb diferencia de 2:"); // Busquem i mostrem les parelles de numeros primers que la diferencia entre ells sigue de 2.
   for (int i = 0; i < numerosPrimos.length - 1; i++) {      // Aquí s'examina si la diferència entre el nombre primer actual  és exactament 2.
     if (numerosPrimos[i + 1] - numerosPrimos[i] == 2) {     //  Si la condició és certa, vol dir que hem trobat una parella de nombres primers
